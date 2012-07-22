@@ -1,0 +1,9 @@
+def get_url(url):
+    req_headers = {'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.A.B.C Safari/525.13'}
+    
+    request = urllib2.Request(url, headers = req_headers)
+    opener = urllib2.build_opener()
+    response = opener.open(request)
+
+    return response.read()
+

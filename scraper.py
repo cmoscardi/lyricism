@@ -18,17 +18,18 @@ def get_url(url):
     return response.read()
 
 def get_genre(artist_name,opener):
-    auth_key= "e0d994d0fc5c2245b211c166513584e8"
-    print sanitize(artist_name)
-    request = ("http://www.what.cd/artist.php?artistname=%s" % (urllib.quote(sanitize(artist_name))))
-    
-    response = opener.open(request)
-    artist_id = response.geturl()[29:]
-    
-    json_request = ("http://what.cd/ajax.php?action=artist&id=%s&auth=%s" % (artist_id, auth_key))
-    json_response = opener.open(json_request)
-    json_parsed = json.loads(json_response.read())
     try:
+        auth_key= "e0d994d0fc5c2245b211c166513584e8"
+        print sanitize(artist_name).encode("utf-8")
+        request = ("http://www.what.cd/artist.php?artistname=%s" % (urllib.quote(sanitize(artist_name))))
+        print request
+        response = opener.open(request)
+        artist_id = response.geturl()[29:]
+
+        json_request = ("http://what.cd/ajax.php?action=artist&id=%s&auth=%s" % (artist_id, auth_key))
+        json_response = opener.open(json_request)
+        json_parsed = json.loads(json_response.read())
+    
         tags_list=json_parsed['response']['tags']
 
 
@@ -46,7 +47,8 @@ def get_genre(artist_name,opener):
         return genre_list
 
 
-    except (KeyError,TypeError):
+    except (urllib2.HTTPError,KeyError,TypeError):
+        print "this guy had an error"
         return ['unknown']
 
 def sanitize(artist_name):
@@ -63,7 +65,7 @@ def create_lists():
     username=raw_input("what is your what username:  ")
     password=raw_input("what is your what password:  ")
     opener=what_login(username,password)
-    for letter in list(ascii_letters)[1:26]:
+    for letter in list(ascii_letters)[2:26]:
         time.sleep(5)
         print letter
         artist_page=get_url(("http://www.azlyrics.com/%s.html" % letter))
