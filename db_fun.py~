@@ -1,0 +1,5 @@
+def import_complete_letter(letter):
+    
+    in_file = open("database/%s/%s_with_lyrics.txt")
+    for line in in_file:
+        artist = json.loads(line[:-1])

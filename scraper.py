@@ -47,7 +47,7 @@ def get_genre(artist_name,opener):
         return genre_list
 
 
-    except (urllib2.HTTPError,KeyError,TypeError):
+    except:
         print "this guy had an error"
         return ['unknown']
 
@@ -65,7 +65,7 @@ def create_lists():
     username=raw_input("what is your what username:  ")
     password=raw_input("what is your what password:  ")
     opener=what_login(username,password)
-    for letter in list(ascii_letters)[2:26]:
+    for letter in list(ascii_letters)[9:26]:
         time.sleep(5)
         print letter
         artist_page=get_url(("http://www.azlyrics.com/%s.html" % letter))
