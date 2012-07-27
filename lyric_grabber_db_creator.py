@@ -24,9 +24,10 @@ def insert_some_lyrics(letter):
 
     in_file=open(("database/%s.txt" % letter))
     out_file=open(("database/%s/%s_with_lyrics.txt" % (letter,letter)),'a')
-    for i in range(162):
-        in_file.readline()
+   # for i in range(165):
+   #     in_file.readline()
     #meat
+
     for line in in_file:
         try:
             artist_info=json.loads(line[:-1])
@@ -84,7 +85,7 @@ def insert_some_lyrics(letter):
             out_file.write("]")
             out_file.write("}")
             out_file.write("\n")
-        except HTTPError:
+        except:
             print "huh that one didn't work"
 
 
