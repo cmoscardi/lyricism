@@ -1,0 +1,32 @@
+<!doctype HTML>
+<html>
+  <head>
+	<title>Search Song Lyrics for fun and profit?</title>
+	<link rel='stylesheet' href='/static/css/styles.css' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+	<script type='text/javascript' src='/static/js/jquery_fun.js'></script>
+  </head>
+  <body>
+	<div id='left-container'>
+	  VITAL STATISTICS
+	  <ul id='vitals'>
+ 	    <li><span id="songs">SONGS: {{x}}</span></li>
+	    <li><span id="artists">ARTISTS: {{y}}</span></li>
+	    <li><span id="genres">GENRES: {{z}}</span></li>
+	    <li><span id="words">WORDS: {{w}}</span></li>
+	  </ul>
+	</div>
+	<div id='center-container'>
+	  <h1 id="titlebar">LYRICISM</h1>
+	  <div id='search-container'>
+		<form name='input' action='.' method='get'>
+			<input id='search' name='q' type='text' autofocus></input>
+			<input id='button' value='search lyrics database' type='submit'></input>
+		</form>
+		<span style="color:#0CE004; font-weight:bold;">cluck_u </span><span style="color:#D804E0; font-weight:bold;">clucks: </span> 
+	  </div>
+	</div>
+	  <div id='interesting'> this database has {{x}} songs from {{y}} artists, {{z}} unique genres and {{w}} words total </div>
+  </body>
+</html>
