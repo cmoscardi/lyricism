@@ -2,6 +2,7 @@ from flask import Flask
 from flask import send_from_directory
 from flask import request
 from flask import render_template
+from flask import jsonify
 import pymongo
 import json
 import os
@@ -18,20 +19,37 @@ def index():
     w=db.word_count
     z=db.genre_count
     print x
+    if query:
+        return render_template('results.html',query=query)
+
+    else:
+        return render_template('index.html',w=w,x=x,y=y,z=z) 
+
+@app.route('/data/')
+def data():
+    query = request.args.get('q','')
 
     if query:    
         frequency_a_priori=db.find_in_counts(query)
         print 'query was %s' % query
         frequency_in_songs=db.frequency_of_word(query)
-        return ("dat werd appears in %s songs, and %s times." % (frequency_in_songs, frequency_a_priori))
-
+        return jsonify(\
+            {
+            "status":"success",
+            "results":[
+                {
+                "name":"Occurs on its own", 
+                "count":str(frequency_a_priori)
+                }, 
+                {
+                "name":"Occurrs at least once in",
+                "count":str(frequency_in_songs)
+                }
+            ]
+            }
+        )
     else:
-        print 'here'
-        return render_template('index.html',w=w,x=x,y=y,z=z) 
-
-@app.route('/name/<name>')
-def hello(name):
-    return "hi, "+name
+        return jsonify({"status":"failure"})
 
 if __name__=="__main__":
     app.run(debug=True)
