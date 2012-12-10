@@ -16,6 +16,22 @@
           return d.name +":"+ d.count
         });
       }
+      
+      function bar_chart(data){
+        "use strict";
+        d3.select("#chart_area")
+          .append("div")
+            .attr("class","bar_chart")
+          .selectAll(".bar")
+          .data(data.counts)
+          .enter()
+          .append("div")
+            .attr("class","bar")
+            .style("width", function(d){return d.count/10 + "px"})
+            .style("outline","1px solid black")
+            .text(function(d){return d.count});
+      
+      }
     </script>
   </head>
   <body>

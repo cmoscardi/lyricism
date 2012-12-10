@@ -10,10 +10,10 @@ class Database:
     def __init__(self):
         self.db=Connection().song_lyrics
         
-        self.artist_count= self.get_artist_count()
-        self.song_count = self.get_song_count()
-        self.word_count = self.get_word_count()
-        self.genre_count = self.get_genre_count()
+        #self.artist_count= self.get_artist_count()
+        #self.song_count = self.get_song_count()
+        #self.word_count = self.get_word_count()
+        #self.genre_count = self.get_genre_count()
 
     def import_complete_letter(self,letter):
         artist_collection = self.db.artists
@@ -115,9 +115,9 @@ class Database:
 
 
     def frequency_of_word(self, word):
-        #TODO: Finish this
         mapper = Code(\
 ("""function() {
+  print("hello");
   this.songs.forEach(function(song) {
     if(String(song['lyrics']).indexOf("%s")!=-1){
        emit('a',1);
@@ -133,33 +133,71 @@ class Database:
      }
      return total;
 }""")
-        print 'before the result line'
         result = self.db.artists.map_reduce(mapper,reducer,"word_find_result")
-        print 'and we are hereeeee'
         return self.db.word_find_result.find_one()['value'] 
     
     def word_counter(self):
         mapper = Code(\
 """function(){
+     print("mapping");
+     var genre = this['genre'][0];
      this.songs.forEach(function(song) {
        var songLines = song['lyrics'].split("\\n");
        songLines.forEach(function(songLine) {
          var songWords = songLine.split(" ");
          songWords.forEach(function(songWord){
-           emit(songWord.replace(/^\s+|\s+$|,|\?|\!|\./g,'').replace(/^\s+|\s+$/g,''),1);
+           emit(songWord.replace(/^\s+|\s+$|,|\?|\!|\./g,'').replace(/^\s+|\s+$/g,''),Object({"contents":[{"genre":genre, "count":1}]}));
          });
        });
      });
 
    }
 """)
+
+
+        '''this is really messy because
+        i want the following output (for each entry):
+        {word:[genre_1:count,genre_2:count]} etc.'''
         reducer= Code(\
 """function(key,values){
-     var total=0;
-     for(var i=0;i<values.length;i++){
-       total+=values[i];
+     
+     var expired_genres=[];
+     var out_array=[];
+     
+     //iterate over all arrays
+     for(var v in values){
+       print(v['contents']);
+       value_array= v['contents'];
+       value_array.forEach(function(u){
+         var genre = u['genre'];
+         var total = 0;
+         var seen= false;
+         for(var e in expired_genres){
+           if(e==genre){
+             seen=true;
+           }
+         }
+
+         if(!seen){
+           for(var w in values){
+             compare_array = w['contents'];
+             for(var q in compare_array){
+               if(q['genre']==genre){
+                 total+=q['count'];
+               }
+             }
+           }
+
+           out_array.push({"genre":genre,"count":total});
+
+         }
+        
+       
+       });
      }
-     return total;
+     
+     return Object({"contents":out_array});
+
    }""")
         result = self.db.artists.map_reduce(mapper,reducer,"wordcountresult")
 
