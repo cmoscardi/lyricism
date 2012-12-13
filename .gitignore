@@ -3,3 +3,6 @@ bin
 include
 database
 lib
+*~
+*.pyc
+
