@@ -11,7 +11,7 @@ genre_dict={}
 punk = ['punk','punk rock', 'hardcore']  #they evolved together
 pop = ['pop','pop and chart','electronic','dance and electronica','electronica','dance','synthpop']
 folk = ['folk','country']
-hiphop = ['hip hop','hip hop rnb and dance hall', 'hip-hop', 'hiphop','rnb','soul'] #hip-hop and rnb. soul might be out of place
+hiphop = ['hip hop','hip hop rnb and dance hall', 'hip-hop', 'hiphop','rnb','soul','rap'] #hip-hop and rnb. soul might be out of place
 indie = ['rock and indie','indie rock','indie','new wave', 'twee']
 rock = ['post-rock','rock','classic pop and rock','alternative rock','hard rock','progressive rock'] #prog and post may be controversial in this genre
 metal= ['metal','heavy metal','death meta','thrash metal','black metal'] #OK metalheads
@@ -46,6 +46,12 @@ word_indices = sorted(words)
 
 
 #end word indices#
+def import_lyrics(song):
+    
+
+
+
+
 def track_lyrics(lyrics_db,track_id):
     counts = {}
     cursor = lyrics_db.execute("SELECT * FROM lyrics WHERE track_id='%s';" % track_id)

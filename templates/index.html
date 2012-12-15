@@ -5,28 +5,38 @@
 	<link rel='stylesheet' href='/static/css/styles.css' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
-	<script type='text/javascript' src='/static/js/jquery_fun.js'></script>
   </head>
   <body>
-	<div id='left-container'>
-	  VITAL STATISTICS
-	  <ul id='vitals'>
- 	    <li><span id="songs">SONGS: {{x}}</span></li>
-	    <li><span id="artists">ARTISTS: {{y}}</span></li>
-	    <li><span id="genres">GENRES: {{z}}</span></li>
-	    <li><span id="words">WORDS: {{w}}</span></li>
+  <div id='left-container'>
+    <h2>Genres Considered</h2>
+	  <ul id='genres'>
+ 	    <li>Rock</li>
+	    <li>Pop</li>
+	    <li>Indie</li>
+      <li>Hip-Hop</li>
+      <li>Folk</li>
+      <li>Dance</li>
+      <li>Metal</li>
+      <li>Punk</li>
 	  </ul>
-	</div>
-	<div id='center-container'>
+  </div>
+  <div id='center-container'>
+    <form name='predict' action="/predict" method="POST">
+      Enter your lyrics here, (possibly) predict what genre <i>you</i> think they are, and then click the button!
+      <textarea cols="60" rows="20" id="lyrics" name="lyrics"></textarea><br />
+      <input type="text" name="pred" value="got a prediction?" onfocus="this.value=''"></input>
+      <input type="submit" name="thesubmit" value="predict!"></input>
+    </form>
+  </div>
+	<!--<div id='right-container'>
 	  <h1 id="titlebar">LYRICISM</h1>
 	  <div id='search-container'>
-		<form name='input' action='.' method='get'>
-			<input id='search' name='q' type='text' autofocus></input>
-			<input id='button' value='search lyrics database' type='submit'></input>
-		</form>
-		<span style="color:#0CE004; font-weight:bold;">cluck_u </span><span style="color:#D804E0; font-weight:bold;">clucks: </span> 
+      <form name='input' action='.' method='get'>
+        <input id='search' name='q' type='text' autofocus></input>
+        <input id='button' value='search lyrics database' type='submit'></input>
+      </form>
+
 	  </div>
-	</div>
-	  <div id='interesting'> this database has {{x}} songs from {{y}} artists, {{z}} unique genres and {{w}} words total </div>
+  </div> -->
   </body>
 </html>

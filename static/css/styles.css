@@ -1,12 +1,22 @@
 body {
+  background: #102840;
 	font-family:'Questrial', sans-serif;
-	color: #FFA200;
+	color: #A3D0D6;
 	font-size: 20px;
+  margin: 5em auto;
+  text-align: center;
 }
 
 ul {
-	float:left;
 	list-style-type: none;
+  text-align: left;
+}
+textarea {
+  background: #3A6B9C;
+}
+a:visited {
+color: #6ADEBB;
+
 }
 
 #titlebar {
@@ -26,8 +36,6 @@ ul {
 }
 
 #search { 
-	width: 500px;
-	height: 35px;
 	position: relative;
 	margin: 0 auto;
 	font-size: 20px;
@@ -37,31 +45,15 @@ ul {
 }
 #left-container {
 	float: left;
+  margin-left: 2em;
 }
-#interesting {
-	width: 500px;
-	padding-top: 20px;
-	position: relative;
-	margin: 3em auto;
+#center-container{
+  float:center;
+  width:30em;
+  position:relative;
+  margin: 0 auto;
+}
+#right-container{
+  float:right;
 }
 
-#button {
-	border-top: 1px solid #96d1f8;
-	background: #78c9ff;
-	background: -webkit-gradient(linear, left top, left bottom, from(#235b80), to(#78c9ff));
-	background: -webkit-linear-gradient(top, #235b80, #78c9ff);
-	background: -moz-linear-gradient(top, #235b80, #78c9ff);
-	padding: 16px 32px;
-	-webkit-border-radius: 40px;
-	border-radius: 40px;
-	-webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-	box-shadow: rgba(0,0,0,1) 0 1px 0;
-	text-shadow: rgba(0,0,0,.4) 0 1px 0;
-	color: white;
-	font-size: 24px;
-	text-decoration: none;
-	position:relative;
-	width: 500px;
-	margin: 0 auto;
-	text-align: center;
-}
